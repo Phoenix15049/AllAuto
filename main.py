@@ -430,8 +430,8 @@ if __name__ == '__main__':
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
 
-    OpenLinks(GameLinkIndex(SampleGN, AllGameNames), AllGameLinks, SampleGN, True)
-#    RemoveAllDiscount()
+#    OpenLinks(GameLinkIndex(SampleGN, AllGameNames), AllGameLinks, SampleGN, True)
+    RemoveAllDiscount()
 #    sleep(5)
 #    RemoveInsideDiscount()
 

@@ -547,7 +547,7 @@
      <attribute name="title">
       <string>باز کردن بازی ها</string>
      </attribute>
-     <widget class="QPushButton" name="OpenGames">
+     <widget class="QPushButton" name="OpenGamesBtn">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -565,7 +565,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#OpenGames {
+       <string notr="true">QPushButton#OpenGamesBtn {
     background: #f5f5fa;
     border: 0;
     border-radius: 8px;
@@ -576,18 +576,18 @@
     text-align: center;
 }
 
-QPushButton#OpenGames:hover {
+QPushButton#OpenGamesBtn:hover {
     background: #f8f8ff;
     box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 rgba(29, 13, 202, 0.09);
 }
 
-QPushButton#OpenGames:pressed {
+QPushButton#OpenGamesBtn:pressed {
     background: #f5f5fa;
     box-shadow: inset -5px -5px 10px 0 #fff, inset 5px 5px 10px 0 rgba(29, 13, 202, 0.09);
 }
 
 @media (min-width: 768px) {
-    QPushButton#OpenGames {
+    QPushButton#OpenGamesBtn {
         padding: 24px;
     }
 }
@@ -667,7 +667,7 @@ QPushButton#OpenGames:pressed {
        <string>نام بازی</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="OpenGame_Single">
+     <widget class="QPushButton" name="OpenGame_SingleBtn">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -685,7 +685,7 @@ QPushButton#OpenGames:pressed {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#OpenGame_Single {
+       <string notr="true">QPushButton#OpenGame_SingleBtn {
     background: #f5f5fa;
     border: 0;
     border-radius: 8px;
@@ -695,18 +695,18 @@ QPushButton#OpenGames:pressed {
     text-align: center;
 }
 
-QPushButton#OpenGame_Single:hover {
+QPushButton#OpenGame_SingleBtn:hover {
     background: #f8f8ff;
     box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 rgba(29, 13, 202, 0.09);
 }
 
-QPushButton#OpenGame_Single:pressed {
+QPushButton#OpenGame_SingleBtn:pressed {
     background: #f5f5fa;
     box-shadow: inset -5px -5px 10px 0 #fff, inset 5px 5px 10px 0 rgba(29, 13, 202, 0.09);
 }
 
 @media (min-width: 768px) {
-    QPushButton#OpenGames {
+    QPushButton#OpenGame_SingleBtn {
         padding: 24px;
     }
 }
@@ -721,6 +721,56 @@ QPushButton#OpenGame_Single:pressed {
      <attribute name="title">
       <string>حذف تخفیف</string>
      </attribute>
+     <widget class="QPushButton" name="RemoveDiscBtn">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>IRANYekan</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#RemoveDiscBtn {
+    background: #f5f5fa;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: -10px -10px 30px 0 #fff, 10px 10px 30px 0 rgba(29, 13, 202, 0.09);
+    color: #2a1f62;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+}
+
+QPushButton#RemoveDiscBtn:hover {
+    background: #f8f8ff;
+    box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 rgba(29, 13, 202, 0.09);
+}
+
+QPushButton#RemoveDiscBtn:pressed {
+    background: #f5f5fa;
+    box-shadow: inset -5px -5px 10px 0 #fff, inset 5px 5px 10px 0 rgba(29, 13, 202, 0.09);
+}
+
+@media (min-width: 768px) {
+    QPushButton#RemoveDiscBtn {
+        padding: 24px;
+    }
+}
+</string>
+      </property>
+      <property name="text">
+       <string>حذف کامل تخفیف</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="ET">
      <attribute name="title">
