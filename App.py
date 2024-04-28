@@ -17,7 +17,7 @@ class MyApp(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
+        self.setWindowFlag(Qt.WindowStaysOnTopHint)
         # Connect the button click to a function
         self.ui.RemoveDiscBtn.clicked.connect(main.RemoveAllDiscount)
         self.ui.OpenGamesBtn.clicked.connect(self.OpenGamesFullFunc)
@@ -26,20 +26,9 @@ class MyApp(QMainWindow):
     def OpenGamesFullFunc(self, steamdbcheck=False, variablecheck=False):
         main.FullOpenAllGames(self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked())
 
-    def StartRemoveAllDiscount(self):
-        testthread = threading.Thread(target=main.RemoveAllDiscount())
-
-    def start_task(self):
-        self.ui.RemoveDiscBtn.setEnabled(False)  # Disable button during task
-        self.worker_thread.start()
-
-
     def OpenSingleGameinside(self):
-        main.FullOpenSingleGames(self.ui.SteamDBCheck.isChecked(),self.ui.VarsCheck.isChecked(),self.ui.LinkForOpen_Input.toPlainText())
-
-    def task_finished(self):
-        self.button.setEnabled(True)  # Re-enable button
-        print("Task finished")
+        main.FullOpenSingleGames(self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked(),
+                                 self.ui.LinkForOpen_Input.toPlainText())
 
 
 def mainstart():
