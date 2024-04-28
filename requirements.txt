@@ -1,0 +1,8 @@
+PySide2~=5.15.2.1
+PyAutoGUI~=0.9.54
+mss~=9.0.1
+pytesseract~=0.3.10
+pillow~=10.3.0
+plyer~=2.1.0
+win10toast~=0.9
+PyQt5~=5.15.10

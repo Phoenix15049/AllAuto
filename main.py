@@ -1,12 +1,12 @@
+import re
 import webbrowser
-from pyautogui import *
-import pyautogui as pg
 import mss
+import pyautogui as pg
+import pytesseract
 from PIL import Image
 from plyer import notification
-from win10toast import ToastNotifier
-import pytesseract
-import re
+from pyautogui import *
+import threading
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -298,17 +298,26 @@ def GameLinkIndex(sample, gamelist):  ## Temp
     return indexes
 
 
-def OpenLinks(indexes, links, DBNames=None, DB=False):  ## Temp
+def OpenLinks(indexes, links, DBNames=None, DB=False, VarC=False):  ## Temp
     if DBNames is None:
         DBNames = []
     for i in range(len(indexes)):
-        if DB:
-            webbrowser.open_new(links[indexes[i]])
-            sleep(0.5)
-            SteamdbOpenSingle(DBNames[i])
+        if VarC:
+            if DB:
+                OpenSingleGame(links[indexes[i]])
+                sleep(0.5)
+                SteamdbOpenSingle(DBNames[i])
+            else:
+                OpenSingleGame(links[indexes[i]])
+                sleep(0.5)
         else:
-            webbrowser.open_new(links[indexes[i]])
-            sleep(0.5)
+            if DB:
+                webbrowser.open_new(links[indexes[i]])
+                sleep(0.5)
+                SteamdbOpenSingle(DBNames[i])
+            else:
+                webbrowser.open_new(links[indexes[i]])
+                sleep(0.5)
 
 
 def ListLinks(SampleGn, allgamenames, allgamelinks):
@@ -425,15 +434,33 @@ def StrtoNum(str):
     return int(result)
 
 
+def FullOpenAllGames(steamdbcheck=False, variablecheck=False):
+    AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
+    AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
+    SampleGN = FileInside(".\\GameName.txt")
+
+    OpenLinks(GameLinkIndex(SampleGN, AllGameNames), AllGameLinks, SampleGN, steamdbcheck, variablecheck)
+
+
+def FullOpenSingleGames(steamdbcheck=False, variablecheck=False,GameName = ""):
+    AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
+    AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
+    SampleGN = [GameName]
+
+    OpenLinks(GameLinkIndex(SampleGN, AllGameNames), AllGameLinks, SampleGN, steamdbcheck, variablecheck)
+
+
 if __name__ == '__main__':
     AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
 
-#    OpenLinks(GameLinkIndex(SampleGN, AllGameNames), AllGameLinks, SampleGN, True)
+    OpenAllGames()
+    testthread = threading.Thread(target=RemoveAllDiscount())
+    testthread.start()
+
+    #    sleep(5)
     RemoveAllDiscount()
-#    sleep(5)
-#    RemoveInsideDiscount()
 
 # returnGN()
 
