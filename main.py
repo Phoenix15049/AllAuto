@@ -817,8 +817,3 @@ if __name__ == '__main__':
     AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
-
-    testthread = threading.Thread(target=RemoveAllDiscount())
-    testthread.start()
-
-    RemoveAllDiscount()
