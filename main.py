@@ -117,7 +117,7 @@ def openingvars(step, maxloc):
     counter = pg.position().y
     stepdec = True
     while counter >= maxloc:
-        pg.move(0, -step, 0.6)
+        pg.move(0, -step, 0.2)  # dur Was 0.6
         pg.leftClick()
         counter -= step
         if stepdec:
@@ -154,7 +154,7 @@ def screenvarlocating():
         openingvars(step, maxloc)
         scroll(300)
         sleep(0.1)
-        move(0, 320, 0.6)
+        move(0, 320, 0.1)  # dur Was 0.6
         screenvarlocating()
 
 
@@ -230,7 +230,9 @@ def RemoveInsideDiscount():
     for i in range(8):
         press('tab')
     press('backspace')
-
+    press('tab')
+    press('backspace')
+    sleep(0.1)  #Was 0.5
     mainprice = returnGN()
     MainPrice = discounter(mainprice)
     EmaalSood(MainPrice)
@@ -266,8 +268,7 @@ def EmaalSood(MainPrice):
     if MainPrice == 10:
         img = 'sabett.png'
         imgadr = "Assets\\Images\\" + img
-        sleep(0.1)
-        press('tab')
+        # Was sleep(0.1)
         typewrite("10")
         try:
             location = pg.locateOnScreen(imgadr, grayscale=False, confidence=0.8)
@@ -289,8 +290,7 @@ def EmaalSood(MainPrice):
         print("Not10")
         img = 'darsad.png'
         imgadr = "Assets\\Images\\" + img
-        sleep(0.1)
-        press('tab')
+        # Was sleep(0.1)
         pg.write(str(MainPrice))
         try:
             location = pg.locateOnScreen(imgadr, grayscale=False, confidence=0.8)
@@ -342,28 +342,28 @@ def find_ZL_and_position():
 
 
         """
-    sleep(0.5)
+    #sleep(0.5)  Was
     if imagecheck('ISLOADING.png'):
         isloadingcheck()
     else:
-        sleep(7)
-    scroll(300)
+        sleep(6)  # Was 7
+    scroll(330)  # Was 300
     ScrollPointFind('ZL.png', 1234, 580, 219, 412, 0.8, 30)
-    MoveToPic('ZL.png', True, 0.3)
+    MoveToPic('ZL.png', True, 0.1)
     move(50, 0)
     screenvarlocating()
     VarsFullOpenCheck()
-    sleep(0.5)
+    #sleep(0.5) #Was
     while not imagecheck('ZT.png'):
         if imagecheck('PIC.png'):
-            ScrollPointFind('Laghvzaman.png', 620, 223, 106, 120, 0.8, 30)
-            sleep(0.4)
+            ScrollPointFind('Laghvzaman.png', 620, 223, 106, 120, 0.8, 60) #  scr Was 30 NEWWW
+            #sleep(0.1)  # Was 0.4
             print("X")
             RemoveInsideDiscount()
-            sleep(0.8)
-        scroll(-450)
+            #sleep(0.9)  # Was 0.8
+        scroll(-600)  # Was -450
 
-    MoveToPic('ZT.png', True, 0.6)
+    MoveToPic('ZT.png', True, 0.1)
 
 
 def SteamdbOpenSingle(GameName):
@@ -502,6 +502,7 @@ def FileInside(filepath):
     for line in lines:
         AllLines.append(line.replace("\n", ""))
     return AllLines
+
 
 def OpenLinks(links, DBNames=None, steamdbOpen=False, variablesOpen=False):  ## Main Opener
     """
@@ -646,8 +647,8 @@ def OpenSingleGame(link):
     webbrowser.open_new(link)
 
     ImgFind('1st.png')
-    pg.scroll(-3000)
-    ScrollPointFind('2nd.png', 1390, 150, 330, 880, 0.8, 400)
+    pg.scroll(-4000)  # Was 3000 and works well
+    ScrollPointFind('2nd.png', 1390, 150, 330, 880, 0.8, 450)  # scr Was 400 and works well
     ScrollPointFind('2nd.png', 1483, 214, 237, 162, 0.8, 50)
 
     MoveToPic("3rd.png", True)
@@ -763,7 +764,7 @@ def returnGN():
         - StrtoNum(text): Converts the extracted text into a numerical value.
         - sleep(seconds): Pauses the execution for the specified duration.
         """
-    sleep(0.5)
+    sleep(0.1)  #Was 0.5
     loc = ImgFind('GN.png')
     print(loc)
     x, y = loc[0] - 130, loc[1]
@@ -817,3 +818,4 @@ if __name__ == '__main__':
     AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
+    RemoveAllDiscount()
