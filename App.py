@@ -12,6 +12,17 @@ import main
 import threading
 
 
+class WorkerThread(QThread):
+    def __init__(self, func, *args, **kwargs):
+        super().__init__()
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+    def run(self):
+        self.func(*self.args, **self.kwargs)
+
+
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -24,7 +35,9 @@ class MyApp(QMainWindow):
         self.ui.OpenGame_SingleBtn.clicked.connect(self.OpenSingleGameinside)
 
     def OpenGamesFullFunc(self, steamdbcheck=False, variablecheck=False):
-        main.FullOpenAllGames(self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked())
+        worker_thread = WorkerThread(main.FullOpenAllGames, self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked())
+        worker_thread.run()
+#       main.FullOpenAllGames(self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked())
 
     def OpenSingleGameinside(self):
         main.FullOpenSingleGames(self.ui.SteamDBCheck.isChecked(), self.ui.VarsCheck.isChecked(),

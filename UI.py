@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainjjFSmU.ui'
+## Form generated from reading UI file 'MainAiJsaa.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -291,6 +291,18 @@ class Ui_MainWindow(object):
         self.OnScreenRemCheck = QCheckBox(self.HA)
         self.OnScreenRemCheck.setObjectName(u"OnScreenRemCheck")
         self.OnScreenRemCheck.setGeometry(QRect(10, 180, 91, 20))
+        self.MultiRemCheck = QCheckBox(self.HA)
+        self.MultiRemCheck.setObjectName(u"MultiRemCheck")
+        self.MultiRemCheck.setGeometry(QRect(10, 20, 111, 20))
+        self.MultiRemCounter = QSpinBox(self.HA)
+        self.MultiRemCounter.setObjectName(u"MultiRemCounter")
+        self.MultiRemCounter.setGeometry(QRect(80, 50, 42, 22))
+        self.MultiRemCounter.setCursor(QCursor(Qt.ArrowCursor))
+        self.MultiRemCounter.setWrapping(False)
+        self.MultiRemCounter.setFrame(True)
+        self.MultiRemCounter.setAlignment(Qt.AlignCenter)
+        self.MultiRemCounter.setKeyboardTracking(True)
+        self.MultiRemCounter.setMinimum(1)
         self.tabWidget.addTab(self.HA, "")
         self.ET = QWidget()
         self.ET.setObjectName(u"ET")
@@ -320,7 +332,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -339,6 +351,7 @@ class Ui_MainWindow(object):
         self.G_name_label_2.setText(QCoreApplication.translate("MainWindow", u"\u0646\u0627\u0645 \u0628\u0627\u0632\u06cc", None))
         self.RemoveDisc_SingleBtn.setText(QCoreApplication.translate("MainWindow", u"\u062d\u0630\u0641 \u062a\u062e\u0641\u06cc\u0641 \u0628\u0627\u0632\u06cc", None))
         self.OnScreenRemCheck.setText(QCoreApplication.translate("MainWindow", u"OnScreen", None))
+        self.MultiRemCheck.setText(QCoreApplication.translate("MainWindow", u"\u062d\u0630\u0641 \u06af\u0631\u0648\u0647\u06cc", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.HA), QCoreApplication.translate("MainWindow", u"\u062d\u0630\u0641 \u062a\u062e\u0641\u06cc\u0641", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ET), QCoreApplication.translate("MainWindow", u"\u0627\u0639\u0645\u0627\u0644 \u062a\u062e\u0641\u06cc\u0641", None))
         self.plainTextEdit.setPlainText("")

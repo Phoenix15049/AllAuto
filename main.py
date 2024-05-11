@@ -189,7 +189,7 @@ def imagecheck(img):
 
 
 def isloadingcheck():
-    while imagecheck('ISLOADING.png'):
+    while not imagecheck('Hazv.png'):
         print("is Loading")
 
 
@@ -227,12 +227,11 @@ def RemoveInsideDiscount():
         """
     MoveToPic('Laghvzaman.png', True, 0.1)
     pg.leftClick()
-    for i in range(8):
-        press('tab')
+    press('tab', 8)
     press('backspace')
     press('tab')
     press('backspace')
-    sleep(0.1)  #Was 0.5
+    sleep(0.1)  # Was 0.5
     mainprice = returnGN()
     MainPrice = discounter(mainprice)
     EmaalSood(MainPrice)
@@ -272,12 +271,12 @@ def EmaalSood(MainPrice):
         typewrite("10")
         try:
             location = pg.locateOnScreen(imgadr, grayscale=False, confidence=0.8)
-            sleep(0.1)
+            # sleep(0.1) Was
             press('tab')
             press('enter')
             press('up')
             press('enter')
-            sleep(0.1)
+            # sleep(0.1) Was
 
 
         except pg.ImageNotFoundException:
@@ -294,12 +293,12 @@ def EmaalSood(MainPrice):
         pg.write(str(MainPrice))
         try:
             location = pg.locateOnScreen(imgadr, grayscale=False, confidence=0.8)
-            sleep(0.1)
+            # sleep(0.1) Was
             press('tab')
             press('enter')
             press('down')
             press('enter')
-            sleep(0.1)
+            # sleep(0.1) Was
 
         except pg.ImageNotFoundException:
             print('ImageNotFoundException: image not found')
@@ -342,25 +341,24 @@ def find_ZL_and_position():
 
 
         """
-    #sleep(0.5)  Was
-    if imagecheck('ISLOADING.png'):
-        isloadingcheck()
-    else:
-        sleep(6)  # Was 7
+    # sleep(0.5)  Was
+
+    isloadingcheck()
+
     scroll(330)  # Was 300
     ScrollPointFind('ZL.png', 1234, 580, 219, 412, 0.8, 30)
     MoveToPic('ZL.png', True, 0.1)
     move(50, 0)
     screenvarlocating()
     VarsFullOpenCheck()
-    #sleep(0.5) #Was
+    # sleep(0.5) #Was
     while not imagecheck('ZT.png'):
         if imagecheck('PIC.png'):
-            ScrollPointFind('Laghvzaman.png', 620, 223, 106, 120, 0.8, 60) #  scr Was 30 NEWWW
-            #sleep(0.1)  # Was 0.4
+            ScrollPointFind('Laghvzaman.png', 620, 223, 106, 120, 0.8, 60)  # scr Was 30 NEWWW
+            # sleep(0.1)  # Was 0.4
             print("X")
             RemoveInsideDiscount()
-            #sleep(0.9)  # Was 0.8
+            # sleep(0.9)  # Was 0.8
         scroll(-600)  # Was -450
 
     MoveToPic('ZT.png', True, 0.1)
@@ -616,12 +614,12 @@ def MoveToPic(img, center=False, dur=0.0):
     moveTo(pos[0], pos[1], dur)
 
 
-def RemoveSingleDiscount(link):
-    OpenSingleGame(link)
+def RemoveSingleDiscount(link, MultiCheck=False):
+    OpenSingleGame(link, MultiCheck)
     find_ZL_and_position()
 
 
-def OpenSingleGame(link):
+def OpenSingleGame(link, multicheck=False):
     """
         Opens a game link on a web page and scrolls to the game variables section.
 
@@ -644,7 +642,10 @@ def OpenSingleGame(link):
         - MoveToPic(filename, bool): Moves the mouse cursor to the specified image.
         - leftClick(): Performs a left-click action at the current mouse cursor position.
         """
-    webbrowser.open_new(link)
+    if multicheck:
+        print("Multi")
+    else:
+        webbrowser.open_new(link)
 
     ImgFind('1st.png')
     pg.scroll(-4000)  # Was 3000 and works well
@@ -716,6 +717,25 @@ def RemoveAllDiscount():
             RemoveSingleDiscount(links[0][i])
 
 
+def OpenGamelink(links):
+    for i in range(len(links)):
+        webbrowser.open_new(links[i])
+        sleep(0.2)
+
+
+def MultiRemoveAllDiscount(count):
+    links = definelinks()
+    counter = 0
+    for i in range(0, len(links[0]), count):
+        group = links[0][i:i + count]
+        OpenGamelink(group)
+        for item in group:
+            RemoveSingleDiscount(item,True)
+            pg.hotkey("ctrl", "tab")
+        sleep(3)
+        print(str(i) + " Row")
+
+
 def show_place(top, left, width, height):
     """
         Function to determine the range by taking a screenshot of the desired area using the
@@ -764,7 +784,7 @@ def returnGN():
         - StrtoNum(text): Converts the extracted text into a numerical value.
         - sleep(seconds): Pauses the execution for the specified duration.
         """
-    sleep(0.1)  #Was 0.5
+    sleep(0.1)  # Was 0.5
     loc = ImgFind('GN.png')
     print(loc)
     x, y = loc[0] - 130, loc[1]
@@ -818,4 +838,4 @@ if __name__ == '__main__':
     AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
-    RemoveAllDiscount()
+    MultiRemoveAllDiscount(3)
