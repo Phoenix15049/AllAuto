@@ -236,7 +236,7 @@ def RemoveInsideDiscount():
     MainPrice = discounter(mainprice)
     EmaalSood(MainPrice)
     isendingcheck()
-
+    pg.position()
 
 def EmaalSood(MainPrice):
     """
@@ -838,4 +838,6 @@ if __name__ == '__main__':
     AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
     AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
     SampleGN = FileInside(".\\GameName.txt")
-    MultiRemoveAllDiscount(3)
+#    MultiRemoveAllDiscount(3)
+    show_place(1050, 500, 200, 300)
+
