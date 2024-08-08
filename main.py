@@ -90,7 +90,30 @@ def read_text_from_screen(x, y, width, height):
     text = pytesseract.image_to_string(cropped_img)
     return text
 
+def imgtotext(img):
+    """
+        Reads text from a specific region of the screen.
 
+        Parameters:
+        - x: The x-coordinate of the top-left corner of the region.
+        - y: The y-coordinate of the top-left corner of the region.
+        - width: The width of the region.
+        - height: The height of the region.
+
+        Returns:
+        - text: The extracted text from the specified region.
+
+        This function captures a screenshot of the entire screen and crops it to the specified region
+        defined by the coordinates (x, y) and dimensions (width, height). The cropped image is then
+        converted to grayscale and processed using Optical Character Recognition (OCR) to extract
+        the text content. Finally, the extracted text is returned.
+        """
+    screenshot = capture_screenshot()
+    
+    cropped_img = img
+    cropped_img = cropped_img.convert('L')
+    text = pytesseract.image_to_string(cropped_img)
+    return text
 def openingvars(step, maxloc):
     """
         Opens variables on a page by finding and clicking each one.
@@ -238,6 +261,7 @@ def RemoveInsideDiscount():
     isendingcheck()
     pg.position()
 
+
 def EmaalSood(MainPrice):
     """
         Function to adjust the price of a product according to the desired profit and update its features.
@@ -362,6 +386,7 @@ def find_ZL_and_position():
         scroll(-600)  # Was -450
 
     MoveToPic('ZT.png', True, 0.1)
+    pg.leftClick() #LASTTTTTTTT CLICK last click
 
 
 def SteamdbOpenSingle(GameName):
@@ -502,7 +527,7 @@ def FileInside(filepath):
     return AllLines
 
 
-def OpenLinks(links, DBNames=None, steamdbOpen=False, variablesOpen=False):  ## Main Opener
+def OpenLinks(links, DBNames=None, steamdbOpen=False, variablesOpen=False, tarikh=False, onlydb=False):  ## Main Opener
     """
         Function to open links based on given conditions.
 
@@ -530,22 +555,44 @@ def OpenLinks(links, DBNames=None, steamdbOpen=False, variablesOpen=False):  ## 
     if DBNames is None:
         DBNames = []
     for i in range(len(links)):
-        if variablesOpen:
-            if steamdbOpen:
-                OpenSingleGame(links[i])
-                sleep(0.5)
-                SteamdbOpenSingle(DBNames[i])
-            else:
-                OpenSingleGame(links[i])
-                sleep(0.5)
+        if onlydb:
+            print("X")
+            SteamdbOpenSingle(DBNames[i])
+            sleep(0.5)
+        elif tarikh:
+            print("X")
+            OpenSingleGame(links[i])
+            sleep(0.5)
+            isloadingcheck()
+            # press('tab',10)
+            # press('enter')
+            MoveToPic('BAction.png', True, 0.1)
+            leftClick()
+            sleep(0.5)
+            press('down', 11)
+            press('enter')
+            write("2024-06-27")
+            press('enter')
+            write("2024-07-11")
+            press('enter')
+
         else:
-            if steamdbOpen:
-                webbrowser.open_new(links[i])
-                sleep(0.5)
-                SteamdbOpenSingle(DBNames[i])
+            if variablesOpen:
+                if steamdbOpen:
+                    OpenSingleGame(links[i])
+                    sleep(0.5)
+                    SteamdbOpenSingle(DBNames[i])
+                else:
+                    OpenSingleGame(links[i])
+                    sleep(0.5)
             else:
-                webbrowser.open_new(links[i])
-                sleep(0.5)
+                if steamdbOpen:
+                    webbrowser.open_new(links[i])
+                    sleep(0.5)
+                    SteamdbOpenSingle(DBNames[i])
+                else:
+                    webbrowser.open_new(links[i])
+                    sleep(0.5)
 
 
 def ListLinks(SampleGn, allgamenames, allgamelinks):
@@ -730,7 +777,7 @@ def MultiRemoveAllDiscount(count):
         group = links[0][i:i + count]
         OpenGamelink(group)
         for item in group:
-            RemoveSingleDiscount(item,True)
+            RemoveSingleDiscount(item, True)
             pg.hotkey("ctrl", "tab")
         sleep(3)
         print(str(i) + " Row")
@@ -834,10 +881,13 @@ def FullOpenSingleGames(steamdbcheck=False, variablecheck=False, GameName=""):
     OpenLinks(links[0], [GameName], steamdbcheck, variablecheck)
 
 
-if __name__ == '__main__':
-    AllGameNames = FileInside(".\\Assets\\Docs\\GameNames.txt")
-    AllGameLinks = FileInside(".\\Assets\\Docs\\GameLinks.txt")
+def EmalTarikh(steamdbcheck=False, variablecheck=False, GameName="", db=False):
     SampleGN = FileInside(".\\GameName.txt")
-#    MultiRemoveAllDiscount(3)
-    show_place(1050, 500, 200, 300)
+    links = definelinks()
+    OpenLinks(links[0], SampleGN, steamdbcheck, variablecheck, True, db)
+
+    print("X")
+
+
+
 
